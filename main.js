@@ -6,9 +6,29 @@ dotenv.config();
 
 const commands = [
     {
-        name: "ping",
-        description: "do i have to explain",
+        name: "ac",
+        description: "Air conditioner",
+        type: 1,
+        options: [
+            {
+                name: "switch",
+                description: "on or off",
+                type: 3,
+                required: true,
+                choices: [
+                    {
+                        name: "on",
+                        value: "ac_on"
+                    },
+                    {
+                        name: "off",
+                        value: "ac_off"
+                    }
+                ]
+            }
+        ]
     }
+
 ]
 
 
@@ -35,9 +55,17 @@ client.on('interactionCreate', async (e) => {
     if (!e.isChatInputCommand) {
         return
     }
-    if (e.commandName === "ping") {
-        await e.reply("pong")
-        console.log("Command executed")
+    switch (e.options.get('switch').value) {
+        case "ac_on": 
+            fetch("http://10.50.0.111:5000/homekit/ac-cool-25c-60min")
+            console.log("AC on")
+            e.reply("AC on")
+            break
+        case "ac_off": 
+            fetch("http://10.50.0.111:5000/homekit/ac-off")
+            console.log("AC off")
+            e.reply("AC off")
+            break
     }
 })
 main();
