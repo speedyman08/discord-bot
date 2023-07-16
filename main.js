@@ -56,12 +56,13 @@ const main = async () => {
   }
 };
 
-let res;
+
 client.on("interactionCreate", async (e) => {
+  let res;
   if (!e.isChatInputCommand) {
     return;
   }
-  if (e.commandName === "ac") {
+  if (e.commandName === "ac" && process.env.whitelist.includes(e.user.id)) {
     switch (e.options.get("switch").value) {
       case "ac_on":
         res = await fetch("http://10.50.0.111:5000/homekit/ac-cool-25c-60min")
@@ -92,6 +93,8 @@ client.on("interactionCreate", async (e) => {
           );
         break;
     }
+  } else {
+    e.reply("Not enough permissions to do this lol")
   }
 });
 main();
