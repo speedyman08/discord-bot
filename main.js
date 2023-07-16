@@ -42,7 +42,7 @@ const client = new Client({
 
 const main = async () => {
     try {
-        console.log("Application commands are being sent")
+        console.log("Refreshing application")
         publishCommands(commands, process.env.TOKEN, process.env.guildID, process.env.clientID)
         client.login(process.env.TOKEN)
         client.on('ready', (e) => {console.log(`${e.user.tag} is ready for use`)})
