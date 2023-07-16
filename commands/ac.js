@@ -2,16 +2,16 @@ import { EmbedBuilder } from "discord.js";
 export const handleAc = async (e) => {
   let res;
   let embed;
-  const urlOff = "http://10.50.0.111:5000/homekit/ac-off"  
+  const urlOff = "http://10.50.0.111:500/homekit/ac-off"  
   if (process.env.whitelist.includes(e.user.id)) {
   switch (e.commandName) {
     case "ac-on":
-        res = await fetch(`http://10.50.0.111:5000/homekit/ac-cool-${e.options.get("temperature").value}-${e.options.get("time").value}min`)
+        res = await fetch(`http://10.50.0.111:5000/homekit/ac-${e.options.get("mode").value}-${e.options.get("temperature").value}-${e.options.get("time").value}min`)
               .then((r) => r.json())
               .then((r) =>{
                 embed = new EmbedBuilder()
                 .setTitle(`${r.result ? ":white_check_mark: Success": ":x: Fail"}`)
-                .setDescription(`${r.result ? "AC turned on" : ""}`)
+                .setDescription(`${r.result ? `AC turned on for ${e.options.get("time").value} minutes` : ""}`)
                 .setColor(`${r.result ? "Green":"Red"}`)
                 e.reply(
                 {

@@ -171,6 +171,22 @@ export const commands = [
                     value: "720"
                 },
             ]
+        },
+        {
+            name: "mode",
+            description: "hot or cold?",
+            type: 3,
+            required: true,
+            choices: [
+                {
+                    name: "heat",
+                    value: "heat"
+                },
+                {
+                    name: "cool",
+                    value: "cool"
+                }
+            ]
         }
       ]
     },
