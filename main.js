@@ -51,21 +51,28 @@ const main = async () => {
     }
 }
 
+
+let res;
 client.on('interactionCreate', async (e) => {
     if (!e.isChatInputCommand) {
         return
     }
     switch (e.options.get('switch').value) {
-        case "ac_on": 
-            fetch("http://10.50.0.111:5000/homekit/ac-cool-25c-60min")
-            console.log("AC on")
-            e.reply("AC on")
+        case "ac_on":
+            res = await fetch("http://10.50.0.111:5000/homekit/ac-cool-25c-60min")
+            .then(r=>r.json())
+            .then(r=>JSON.stringify(r))
+
+            e.reply(res)
             break
         case "ac_off": 
-            fetch("http://10.50.0.111:5000/homekit/ac-off")
-            console.log("AC off")
-            e.reply("AC off")
+            res = await fetch("http://10.50.0.111:5000/homekit/ac-off")
+            .then(r=>r.json())
+            .then(r=>JSON.stringify(r))
+
+            e.reply(res)
             break
-    }
+    }       
 })
 main();
+
