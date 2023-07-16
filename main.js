@@ -58,7 +58,6 @@ const main = async () => {
 
 
 client.on("interactionCreate", async (e) => {
-  
   if (!e.isChatInputCommand) {
     return;
   }
