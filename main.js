@@ -1,6 +1,6 @@
 import { Client, GatewayIntentBits } from "discord.js";
 import dotenv from "dotenv";
-import { publishCommands } from "./publishCommands.js";
+import { publishCommands } from "./commands/publishCommands.js";
 import { handleAc } from "./commands/ac.js"
 import { commands } from "./commands/commands.js";
 dotenv.config();
